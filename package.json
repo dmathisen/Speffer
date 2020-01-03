@@ -1,0 +1,32 @@
+{
+  "name": "Speffer",
+  "version": "1.0.0",
+  "description": "Site Search Specifier",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmathisen/Speffer.git"
+  },
+  "keywords": [],
+  "author": "Dan Mathisen",
+  "license": "ISC",
+  "homepage": "https://speffer.com",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "jquery": "^3.4.1",
+    "next": "^9.1.6",
+    "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.2",
+    "typescript": "^3.7.4"
+  }
+}
