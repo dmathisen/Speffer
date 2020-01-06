@@ -1,6 +1,9 @@
 import Head from 'next/head';
+
 import Header from '../components/Header';
 import SearchForm from '../components/SearchForm';
+import Customize from '../components/Customize';
+
 import DefaultSites from '../data/sites';
 
 function getSearchSites() {
@@ -15,8 +18,6 @@ function getSearchSites() {
 }
 
 const Index = (props) => {
-	console.log(props);
-
 	return(<>
 		<Head>
 			<title>Speffer - Site Search Specifier</title>
@@ -25,10 +26,12 @@ const Index = (props) => {
 		</Head>
 		
 		<Header />
-		<SearchForm categories={props.categories} />
+		<SearchForm categories={props.categories} sites={props.sites} />
+		<Customize categories={props.categories} sites={props.sites} />
 
 		<style global jsx>{`
 			body {
+				overflow-y: scroll;
 				background-image: url(./images/bg.png);
 			}
 		`}</style>

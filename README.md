@@ -5,16 +5,16 @@ Speffer lets you choose custom sites to search, allowing for customization of se
 
 
 ### Installation
-run `npm install`
+Run `npm install`
 
 
 ### Development
-run `npm run dev`
+Run `npm run dev`
 
 
 ### Deployment
-run `npm run build`
+Run `npm run build`
 
-run `npm run export`
+Run `npm run export`
 
 Copy files in `out` directory to webserver
