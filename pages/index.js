@@ -1,9 +1,23 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import SearchForm from '../components/SearchForm';
+import DefaultSites from '../data/sites';
 
-const Index = () => (
-	<>
+function getSearchSites() {
+	if (process.browser) {
+		const localStorageData = window.localStorage.getItem('searchSites');
+		if (localStorageData) {
+			return localStorageData;
+		}
+	}
+
+	return DefaultSites;
+}
+
+const Index = (props) => {
+	console.log(props);
+
+	return(<>
 		<Head>
 			<title>Speffer - Site Search Specifier</title>
 			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -11,14 +25,22 @@ const Index = () => (
 		</Head>
 		
 		<Header />
-		<SearchForm />
+		<SearchForm categories={props.categories} />
 
 		<style global jsx>{`
 			body {
 				background-image: url(./images/bg.png);
 			}
 		`}</style>
-	</>
-);
+	</>);
+};
+
+Index.getInitialProps = () => {
+	const siteData = getSearchSites();
+	return {
+		categories: Object.keys(siteData),
+		sites: siteData
+	}
+}
 
 export default Index;
