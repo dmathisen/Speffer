@@ -16,7 +16,7 @@ const SearchForm = () => (
 					<Form.Group className="mx-auto">
 						<Form.Control as="select" className="mr-2"><option>Select Category</option></Form.Control>
 						<Form.Control type="search" className="mr-2"></Form.Control>
-						<Button type="submit" className="mr-2">Search</Button>
+						<Button type="submit">Search</Button>
 					</Form.Group>
 				</Form>
 

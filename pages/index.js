@@ -15,7 +15,7 @@ const Index = () => (
 
 		<style global jsx>{`
 			body {
-				background-image: url(/images/bg.png);
+				background-image: url(./images/bg.png);
 			}
 		`}</style>
 	</>
