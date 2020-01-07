@@ -25,11 +25,13 @@ const Index = () => {
 	const [sites, setSites]: any = useState(getSearchSites());
 
 	// events
-	const addCategory = (category: string) => {
+	const addCategory = (category: string = '') => {
+		if (!category.trim().length) return;
 		setSites({ ...sites, [category]: [] });
 	};
 
-	const addSite = (category: string, site: string) => {
+	const addSite = (category: string = '', site: string = '') => {
+		if (!category.trim().length || !site.trim().length) return;
 		let categorySites: any[] = sites[category];
 		categorySites.push(site);
 		setSites({ ...sites, [category]: categorySites });
@@ -43,7 +45,7 @@ const Index = () => {
 		console.log('removeSite', category, site);
 	};
 
-	const allEvents = { addCategory, addSite, removeCategory, removeSite };
+	// helpers
 	const categories = Object.keys(sites);
 
 	return(<>
@@ -55,7 +57,7 @@ const Index = () => {
 		
 		<Header />
 		<SearchForm categories={categories} sites={sites} />
-		<Customize categories={categories} sites={sites} events={allEvents} />
+		<Customize categories={categories} sites={sites} events={{ addCategory, addSite, removeCategory, removeSite }} />
 
 		<style global jsx>{`
 			body {

@@ -13,19 +13,16 @@ const SearchForm = ({ categories, sites }: any)  => {
 	const [searchText, setSearchText] = useState('');
 
 	//  events
-	const handleCategoryChange = (e: any) => setSelectedCategory(e.target.value);
-	const handleSearchTextChange = (e: any) => setSearchText(e.target.value);
-
 	const handleSearchSubmit = (e: any) => {
 		e.preventDefault();
-		if (!selectedCategory.length || !searchText.length) return;
+		if (!selectedCategory.trim().length || !searchText.trim().length) return;
 		console.log(`Searching ${selectedCategory} sites for: ${searchText}`);
 		console.log('sites', sites[selectedCategory].join(', '));
 	}
 
 	// helpers
 	const getSitesToSearch = () => {
-		if (!selectedCategory.length) return '';
+		if (!selectedCategory.trim().length) return '';
 		return sites[selectedCategory].join(', ');
 	}
 
@@ -36,7 +33,7 @@ const SearchForm = ({ categories, sites }: any)  => {
 				
 					<Form inline onSubmit={handleSearchSubmit}>
 						<Form.Group className="mx-auto">
-							<Form.Control as="select" className="mr-2" onChange={handleCategoryChange}>
+							<Form.Control as="select" className="mr-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
 								<option value=''>Select Category</option>
 								{
 									categories.map((category: any, index: number) => 
@@ -45,7 +42,7 @@ const SearchForm = ({ categories, sites }: any)  => {
 								}
 							</Form.Control>
 
-							<Form.Control type="search" className="search-bar mr-2" onChange={handleSearchTextChange}></Form.Control>
+							<Form.Control type="search" className="search-bar mr-2" onChange={(e: any) => setSearchText(e.target.value)}></Form.Control>
 
 							<Button type="submit">Search</Button>
 						</Form.Group>

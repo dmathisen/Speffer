@@ -4,7 +4,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 const SitesAdd = ({ selectedCategory, onSubmit, onInputChange }: any) => {
     return(<>
-        <Form inline onSubmit={onSubmit} style={{visibility: selectedCategory && selectedCategory.length ? 'visible' : 'hidden' }}>
+        <Form inline onSubmit={onSubmit} style={{visibility: selectedCategory && selectedCategory.trim().length ? 'visible' : 'hidden' }}>
             <InputGroup className="mb-3">
                 <Form.Control type="text" placeholder="Add Site" onChange={onInputChange}></Form.Control>
                 <InputGroup.Append>

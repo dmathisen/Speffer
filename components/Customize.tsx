@@ -23,9 +23,6 @@ const Customize = ({ categories, sites, events }: any) => {
 	const [siteToAdd, setSiteToAdd]: any = useState('');
 
 	//  events
-	const handleAddCategoryChange = (e: any) => setCategoryToAdd(e.target.value);
-	const handleAddSiteChange = (e: any) => setSiteToAdd(e.target.value);
-
 	const handleCategorySelect = (e: any) => {
 		e.preventDefault();
 		setSelectedCategory(e.target.dataset.category);
@@ -61,13 +58,13 @@ const Customize = ({ categories, sites, events }: any) => {
 
 											<Col>
 												{/* Categories */}
-												<CategoryAdd onSubmit={addCategory} onInputChange={handleAddCategoryChange} />
+												<CategoryAdd onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
 												<CategoryList categories={categories} onCategoryClick={handleCategorySelect} />
 											</Col>
 
 											<Col>
 												{/* Sites */}
-												<SitesAdd selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={handleAddSiteChange} />
+												<SitesAdd selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
 												<SitesList selectedCategorySites={selectedCategorySites} />
 											</Col>
 
