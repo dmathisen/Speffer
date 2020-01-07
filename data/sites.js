@@ -1,4 +1,4 @@
-const DefaultSites = {
+const DefaultSiteData = {
 	"Web Development": [
 		"developer.mozilla.org",
 		"w3.org",
@@ -37,4 +37,4 @@ const DefaultSites = {
 	]
 };
 
-export default DefaultSites;
+export default DefaultSiteData;
