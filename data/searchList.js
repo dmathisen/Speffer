@@ -1,4 +1,4 @@
-const DefaultSiteData = {
+const SearchList = {
 	"Web Development": [
 		"developer.mozilla.org",
 		"w3.org",
@@ -37,4 +37,4 @@ const DefaultSiteData = {
 	]
 };
 
-export default DefaultSiteData;
+export default SearchList;

@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const SearchForm = ({ categories, sites }: any)  => {
+const SearchForm = ({ searchCategories, searchList }: any) => {
 	// state
 	const [selectedCategory, setSelectedCategory] = useState('');
 	const [searchText, setSearchText] = useState('');
@@ -17,13 +17,13 @@ const SearchForm = ({ categories, sites }: any)  => {
 		e.preventDefault();
 		if (!selectedCategory.trim().length || !searchText.trim().length) return;
 		console.log(`Searching ${selectedCategory} sites for: ${searchText}`);
-		console.log('sites', sites[selectedCategory].join(', '));
+		console.log('sites', searchList[selectedCategory].join(', '));
 	}
 
 	// helpers
 	const getSitesToSearch = () => {
 		if (!selectedCategory.trim().length) return '';
-		return sites[selectedCategory].join(', ');
+		return searchList[selectedCategory].join(', ');
 	}
 
 	return(<>
@@ -36,7 +36,7 @@ const SearchForm = ({ categories, sites }: any)  => {
 							<Form.Control as="select" className="mr-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
 								<option value=''>Select Category</option>
 								{
-									categories.map((category: any, index: number) => 
+									searchCategories.map((category: any, index: number) => 
 										<option key={index} value={category}>{category}</option>
 									)
 								}

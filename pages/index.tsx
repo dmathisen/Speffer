@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import SearchForm from '../components/SearchForm';
 import Customize from '../components/Customize';
 
-import DefaultSiteData from '../data/sites';
+import SearchList from '../data/searchList';
 
 function getSearchSites() {
 	// get from local storage, if it exists
@@ -17,25 +17,25 @@ function getSearchSites() {
 	}
 
 	// if not, get data from /data/sites.json
-	return DefaultSiteData;
+	return SearchList;
 }
 
 const Index = () => {
 	// state
-	const [sites, setSites]: any = useState(getSearchSites());
+	const [searchList, setSearchList]: any = useState(getSearchSites());
 
 	// events
 	const addCategory = (category: string = '') => {
 		if (categoryIsValid(category)) {
-			setSites({ ...sites, [category]: [] });
+			setSearchList({ ...searchList, [category]: [] });
 		}
 	};
 
 	const addSite = (category: string = '', site: string = '') => {
 		if (siteIsValid(category, site)) {
-			let categorySites: any[] = sites[category];
+			let categorySites: any[] = searchList[category];
 			categorySites.push(site);
-			setSites({ ...sites, [category]: categorySites });
+			setSearchList({ ...searchList, [category]: categorySites });
 		}
 	};
 
@@ -48,13 +48,13 @@ const Index = () => {
 	};
 
 	// helpers
-	const categories = Object.keys(sites);
+	const searchCategories = Object.keys(searchList);
 
 	const categoryIsValid = (category: string): boolean => {
 		if (!category.trim().length) {
 			return false;
 		}
-		if (categories.find(val => val.toLowerCase() === category.toLowerCase())) {
+		if (searchCategories.find(val => val.toLowerCase() === category.toLowerCase())) {
 			alert('Category already exists');
 			return false;
 		}
@@ -65,11 +65,11 @@ const Index = () => {
 		if (!site.trim().length) {
 			return false;
 		}
-		if (!categories.find((c: string) => c.toLowerCase() === category.toLowerCase())) {
+		if (!searchCategories.find((c: string) => c.toLowerCase() === category.toLowerCase())) {
 			alert('Category does not exist');
 			return false;
 		}
-		if (sites[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
+		if (searchList[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
 			alert('Site already exists');
 			return false;
 		}
@@ -88,8 +88,8 @@ const Index = () => {
 		</Head>
 		
 		<Header />
-		<SearchForm categories={categories} sites={sites} />
-		<Customize categories={categories} sites={sites} events={{ addCategory, addSite, removeCategory, removeSite }} />
+		<SearchForm searchCategories={searchCategories} searchList={searchList} />
+		<Customize searchCategories={searchCategories} searchList={searchList} events={{ addCategory, addSite, removeCategory, removeSite }} />
 
 		<style global jsx>{`
 			body {

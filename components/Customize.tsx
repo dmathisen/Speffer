@@ -12,10 +12,8 @@ import Col from 'react-bootstrap/Col';
 import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Form from 'react-bootstrap/Form';
-import ListGroup from 'react-bootstrap/ListGroup';
 
-const Customize = ({ categories, sites, events }: any) => {
+const Customize = ({ searchCategories, searchList, events }: any) => {
 	// state
 	const [selectedCategory, setSelectedCategory]: any = useState('');
 	const [selectedCategorySites, setSelectedCategorySites]: any = useState('');
@@ -26,7 +24,7 @@ const Customize = ({ categories, sites, events }: any) => {
 	const handleCategorySelect = (e: any) => {
 		e.preventDefault();
 		setSelectedCategory(e.target.dataset.category);
-		setSelectedCategorySites(sites[e.target.dataset.category])
+		setSelectedCategorySites(searchList[e.target.dataset.category])
 	}
 
 	const addCategory = (e: any) => {
@@ -59,7 +57,7 @@ const Customize = ({ categories, sites, events }: any) => {
 											<Col>
 												{/* Categories */}
 												<CategoryAdd onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
-												<CategoryList categories={categories} onCategoryClick={handleCategorySelect} />
+												<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} />
 											</Col>
 
 											<Col>
