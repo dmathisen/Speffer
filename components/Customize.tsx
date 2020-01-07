@@ -29,12 +29,14 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 
 	const addCategory = (e: any) => {
 		e.preventDefault();
-		events.addCategory(categoryToAdd);
+		const success = events.addCategory(categoryToAdd);
+		if (success) setCategoryToAdd('');
 	}
 
 	const addSite = (e: any) => {
 		e.preventDefault();
-		events.addSite(selectedCategory, siteToAdd);
+		const success = events.addSite(selectedCategory, siteToAdd);
+		if (success) setSiteToAdd('');
 	}
 
 	return (<>
@@ -56,13 +58,13 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 
 											<Col>
 												{/* Categories */}
-												<CategoryAdd onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
+												<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
 												<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} />
 											</Col>
 
 											<Col>
 												{/* Sites */}
-												<SitesAdd selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
+												<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
 												<SitesList selectedCategorySites={selectedCategorySites} />
 											</Col>
 
