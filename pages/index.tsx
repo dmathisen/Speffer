@@ -8,7 +8,7 @@ import Customize from '../components/Customize';
 import DefaultSiteData from '../data/sites';
 
 function getSearchSites() {
-	// get from user local storage, if it exists
+	// get from local storage, if it exists
 	if (process.browser) {
 		const localStorageData = window.localStorage.getItem('searchSites');
 		if (localStorageData) {
@@ -26,15 +26,17 @@ const Index = () => {
 
 	// events
 	const addCategory = (category: string = '') => {
-		if (!category.trim().length) return;
-		setSites({ ...sites, [category]: [] });
+		if (categoryIsValid(category)) {
+			setSites({ ...sites, [category]: [] });
+		}
 	};
 
 	const addSite = (category: string = '', site: string = '') => {
-		if (!category.trim().length || !site.trim().length) return;
-		let categorySites: any[] = sites[category];
-		categorySites.push(site);
-		setSites({ ...sites, [category]: categorySites });
+		if (siteIsValid(category, site)) {
+			let categorySites: any[] = sites[category];
+			categorySites.push(site);
+			setSites({ ...sites, [category]: categorySites });
+		}
 	};
 
 	const removeCategory = (category: string) => {
@@ -47,6 +49,36 @@ const Index = () => {
 
 	// helpers
 	const categories = Object.keys(sites);
+
+	const categoryIsValid = (category: string): boolean => {
+		if (!category.trim().length) {
+			return false;
+		}
+		if (categories.find(val => val.toLowerCase() === category.toLowerCase())) {
+			alert('Category already exists');
+			return false;
+		}
+		return true;
+	}
+
+	const siteIsValid = (category: string, site: string): boolean => {
+		if (!site.trim().length) {
+			return false;
+		}
+		if (!categories.find((c: string) => c.toLowerCase() === category.toLowerCase())) {
+			alert('Category does not exist');
+			return false;
+		}
+		if (sites[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
+			alert('Site already exists');
+			return false;
+		}
+		if (!site.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm)) {
+			alert('The URL looks invalid');
+			return false;
+		}
+		return true;
+	}
 
 	return(<>
 		<Head>
