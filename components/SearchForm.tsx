@@ -59,7 +59,7 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 			</Row>
 		</Container>
 
-		<style jsx>{`
+		<style global jsx>{`
 			.search-bar {
 				min-width: 300px;
 			}

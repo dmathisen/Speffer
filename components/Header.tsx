@@ -12,7 +12,7 @@ const Header = () => {
 			</Row>
 		</Container>
 
-		<style jsx>{`
+		<style global jsx>{`
 			h1 {
 				margin: 20px 0;
 				font-size: 48pt;

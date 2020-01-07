@@ -80,7 +80,13 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 			</Row>
 		</Container>
 
-		<style jsx>{`
+		<style global jsx>{`
+			.category-list,
+			.sites-list {
+				max-height: 500px;
+				overflow-y: auto;
+			}
+
 			.category-list .list-group-item {
 				cursor: pointer;
 			}
