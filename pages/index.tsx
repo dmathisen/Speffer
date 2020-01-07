@@ -4,39 +4,29 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import SearchForm from '../components/SearchForm';
 import Customize from '../components/Customize';
-
-import SearchList from '../data/searchList';
-
-function getSearchSites() {
-	// get from local storage, if it exists
-	if (process.browser) {
-		const localStorageData = window.localStorage.getItem('searchSites');
-		if (localStorageData) {
-			return localStorageData;
-		}
-	}
-
-	// if not, get data from /data/sites.json
-	return SearchList;
-}
+import Utilities from '../components/Utilities';
 
 const Index = () => {
-	// state
-	const [searchList, setSearchList]: any = useState(getSearchSites());
+	const [searchList, setSearchList]: any = useState(Utilities.getSearchSites());
+	const searchCategories: string[] = Object.keys(searchList);
 
 	// events
-	const addCategory = (category: string = '') => {
-		if (categoryIsValid(category)) {
+	const addCategory = (category: string = ''): boolean => {
+		if (Utilities.categoryIsValid(searchCategories, category)) {
 			setSearchList({ ...searchList, [category]: [] });
+			return true;
 		}
+		return false;
 	};
 
-	const addSite = (category: string = '', site: string = '') => {
-		if (siteIsValid(category, site)) {
+	const addSite = (category: string = '', site: string = ''): boolean => {
+		if (Utilities.siteIsValid(searchList, searchCategories, category, site)) {
 			let categorySites: any[] = searchList[category];
 			categorySites.push(site);
 			setSearchList({ ...searchList, [category]: categorySites });
+			return true;
 		}
+		return false;
 	};
 
 	const removeCategory = (category: string) => {
@@ -47,38 +37,6 @@ const Index = () => {
 		console.log('removeSite', category, site);
 	};
 
-	// helpers
-	const searchCategories = Object.keys(searchList);
-
-	const categoryIsValid = (category: string): boolean => {
-		if (!category.trim().length) {
-			return false;
-		}
-		if (searchCategories.find(val => val.toLowerCase() === category.toLowerCase())) {
-			alert('Category already exists');
-			return false;
-		}
-		return true;
-	}
-
-	const siteIsValid = (category: string, site: string): boolean => {
-		if (!site.trim().length) {
-			return false;
-		}
-		if (!searchCategories.find((c: string) => c.toLowerCase() === category.toLowerCase())) {
-			alert('Category does not exist');
-			return false;
-		}
-		if (searchList[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
-			alert('Site already exists');
-			return false;
-		}
-		if (!site.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm)) {
-			alert('The URL looks invalid');
-			return false;
-		}
-		return true;
-	}
 
 	return(<>
 		<Head>
