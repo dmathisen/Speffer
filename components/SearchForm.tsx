@@ -13,8 +13,13 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 	const handleSearchSubmit = (e: any) => {
 		e.preventDefault();
 		if (!selectedCategory.trim().length || !searchText.trim().length) return;
-		console.log(`Searching ${selectedCategory} sites for: ${searchText}`);
-		console.log('sites', searchList[selectedCategory].join(', '));
+
+		const base = 'https://www.google.com/search?q=';
+		const siteQueryArr = searchList[selectedCategory].map((site: string, index: number) => {
+			return index === 0 ? `+site%3A${site}` : `+OR+site%3A${site}`;
+		})
+		const url = `${base}${searchText}${siteQueryArr.join('')}`;
+		window.location.href = url;
 	}
 
 	const handleSettingsBtnClick = (e: any) => {
@@ -54,8 +59,8 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 		{/* show list of search sites */}
 		{ selectedCategory.trim().length ? <div>Sites to search:</div> : '' }
 		{
-			selectedCategory.trim().length ? searchList[selectedCategory].map((site: string) => 
-				<Badge variant="secondary" className="mr-2">{site}</Badge>
+			selectedCategory.trim().length ? searchList[selectedCategory].map((site: string, index: number) => 
+				<Badge variant="secondary" className="mr-2" key={index}>{site}</Badge>
 			) : ''
 		}
 
