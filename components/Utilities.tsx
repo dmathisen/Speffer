@@ -1,34 +1,81 @@
 import SearchList from '../data/searchList';
 
 const Utilities = {
-	categoryIsValid(searchCategories: string[], category: string): boolean {
-		if (!category.trim().length) {
+	isAddCategoryValid(searchCategories: string[], category: string): boolean {
+		if (category.trim().length === 0) {
 			return false;
 		}
-		if (searchCategories.find(val => val.toLowerCase() === category.toLowerCase())) {
-			alert('Category already exists');
+		if (Utilities.categoryExists(searchCategories, category)) {
+			alert('Category already exists.');
 			return false;
 		}
 		return true;
 	},
 
-	siteIsValid(searchList: any, searchCategories: string[], category: string, site: string): boolean {
-		if (!site.trim().length) {
+	isRemoveCategoryValid(searchCategories: string[], category: string): boolean {
+		if (category.trim().length === 0) {
 			return false;
 		}
-		if (!searchCategories.find((c: string) => c.toLowerCase() === category.toLowerCase())) {
-			alert('Category does not exist');
-			return false;
-		}
-		if (searchList[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
-			alert('Site already exists');
-			return false;
-		}
-		if (!site.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm)) {
-			alert('The URL looks invalid');
+		if (!Utilities.categoryExists(searchCategories, category)) {
+			alert('Something went wrong. Category does not exist.');
 			return false;
 		}
 		return true;
+	},
+
+	isAddSiteValid(searchCategories: string[], category: string, searchList: any, site: string): boolean {
+		if (site.trim().length === 0) {
+			return false;
+		}
+		if (!Utilities.categoryExists(searchCategories, category)) {
+			alert('Something went wrong. Category does not exist.');
+			return false;
+		}
+		if (Utilities.siteExists(searchList, category, site)) {
+			alert('Site already exists.');
+			return false;
+		}
+		if (!Utilities.urlIsValid(site)) {
+			alert('The URL looks invalid.');
+			return false;
+		}
+		return true;
+	},
+
+	isRemoveSiteValid(searchCategories: string[], category: string, searchList: any, site: string): boolean {
+		if (category.trim().length === 0 || site.trim().length === 0) {
+			return false;
+		}
+		if (!Utilities.categoryExists(searchCategories, category)) {
+			alert('Something went wrong. Category does not exist.');
+			return false;
+		}
+		if (!Utilities.siteExists(searchList, category, site)) {
+			alert('Something went wrong. Site does not exist.');
+			return false;
+		}
+		return true;
+	},
+
+	urlIsValid(site: string): boolean {
+		if (site.match(/^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/gm)) {
+			return true;
+		}
+		return false;
+	},
+
+	categoryExists(searchCategories: string[], category: string): boolean {
+		if (searchCategories.find(cat => cat.toLowerCase() === category.toLowerCase())) {
+			return true;
+		}
+		return false;
+	},
+
+	siteExists(searchList: any, category: string, site: string): boolean {
+		if (searchList[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
+			return true;
+		}
+		return false;
 	},
 
 	getSearchSites() {

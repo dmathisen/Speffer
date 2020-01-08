@@ -10,33 +10,39 @@ const Index = () => {
 	const [searchList, setSearchList]: any = useState(Utilities.getSearchSites());
 	const searchCategories: string[] = Object.keys(searchList);
 
-	// events
+	// update state
 	const addCategory = (category: string = ''): boolean => {
-		if (Utilities.categoryIsValid(searchCategories, category)) {
-			setSearchList({ ...searchList, [category]: [] });
-			return true;
-		}
-		return false;
+		if (!Utilities.isAddCategoryValid(searchCategories, category)) return false;
+		
+		setSearchList({ [category]: [], ...searchList });
+		return true;
+	};
+
+	const removeCategory = (category: string = ''): boolean => {
+		if (!Utilities.isRemoveCategoryValid(searchCategories, category)) return false;
+
+		let updatedSearchList = {...searchList};
+		delete updatedSearchList[category];
+		setSearchList(updatedSearchList);
+		return true;
 	};
 
 	const addSite = (category: string = '', site: string = ''): boolean => {
-		if (Utilities.siteIsValid(searchList, searchCategories, category, site)) {
-			let categorySites: any[] = searchList[category];
-			categorySites.push(site);
-			setSearchList({ ...searchList, [category]: categorySites });
-			return true;
-		}
-		return false;
+		if (!Utilities.isAddSiteValid(searchCategories, category, searchList, site)) return false;
+
+		let updatedCategory: any[] = searchList[category];
+		updatedCategory.unshift(site);
+		setSearchList({ ...searchList, [category]: updatedCategory });
+		return true;
 	};
 
-	const removeCategory = (category: string) => {
-		console.log('removeCategory', category);
-	};
+	const removeSite = (category: string = '', site: string = '') => {
+		if (!Utilities.isRemoveSiteValid(searchCategories, category, searchList, site)) return false;
 
-	const removeSite = (category: string, site: string) => {
-		console.log('removeSite', category, site);
+		let updatedCategory = searchList[category].filter((s: string) => s !== site)
+		setSearchList({ ...searchList, [category]: updatedCategory });
+		return true;
 	};
-
 
 	return(<>
 		<Head>
@@ -47,7 +53,7 @@ const Index = () => {
 		
 		<Header />
 		<SearchForm searchCategories={searchCategories} searchList={searchList} />
-		<Customize searchCategories={searchCategories} searchList={searchList} events={{ addCategory, addSite, removeCategory, removeSite }} />
+		<Customize searchCategories={searchCategories} searchList={searchList} events={{ addCategory, removeCategory, addSite, removeSite }} />
 
 		<style global jsx>{`
 			body {
