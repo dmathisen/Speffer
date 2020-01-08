@@ -1,13 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-const CategoryList = ({ searchCategories, onCategoryClick }: any) => {
+const CategoryList = ({ searchCategories, onCategoryClick, onCategoryRemoveClick }: any) => {
     return(<>
         <ListGroup className="category-list">
             {
                 searchCategories.map((category: any, index: number) => (
-                    <ListGroup.Item as="div" action onClick={onCategoryClick} key={index} data-category={category}>
-                        <Button className="close" variant="link" aria-label="Close"><span aria-hidden="true">&times;</span></Button>
+                    <ListGroup.Item onClick={onCategoryClick} as="div" action key={index} data-category={category}>
+                        <Button onClick={onCategoryRemoveClick} className="close" variant="link" aria-label="Close"><span aria-hidden="true">&times;</span></Button>
                         {category}
                     </ListGroup.Item>
                 ))

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import CategoryList from './CategoryList';
-import CategoryAdd from './CategoryAdd';
+import CategoryAdd from './CategoryAddForm';
 import SitesList from './SitesList';
-import SitesAdd from './SitesAdd';
+import SitesAdd from './SitesAddForm';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -16,7 +16,6 @@ import Card from 'react-bootstrap/Card';
 const Customize = ({ searchCategories, searchList, events }: any) => {
 	// state
 	const [selectedCategory, setSelectedCategory]: any = useState('');
-	const [selectedCategorySites, setSelectedCategorySites]: any = useState('');
 	const [categoryToAdd, setCategoryToAdd]: any = useState('');
 	const [siteToAdd, setSiteToAdd]: any = useState('');
 
@@ -24,7 +23,6 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 	const handleCategorySelect = (e: any) => {
 		e.preventDefault();
 		setSelectedCategory(e.target.dataset.category);
-		setSelectedCategorySites(searchList[e.target.dataset.category])
 	}
 
 	const addCategory = (e: any) => {
@@ -37,6 +35,20 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 		e.preventDefault();
 		const success = events.addSite(selectedCategory, siteToAdd);
 		if (success) setSiteToAdd('');
+	}
+
+	const removeCategory = (e: any) => {
+		e.preventDefault();
+		const el: HTMLElement = e.target.closest('.list-group-item');
+		const category: string | undefined = el.dataset.category;
+		events.removeCategory(category);
+	}
+
+	const removeSite = (e: any) => {
+		e.preventDefault();
+		const el: HTMLElement = e.target.closest('.list-group-item');
+		const site: string | undefined = el.dataset.site;
+		events.removeSite(selectedCategory, site);
 	}
 
 	return (<>
@@ -59,13 +71,13 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 											<Col>
 												{/* Categories */}
 												<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
-												<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} />
+												<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} onCategoryRemoveClick={removeCategory} />
 											</Col>
 
 											<Col>
 												{/* Sites */}
 												<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
-												<SitesList selectedCategorySites={selectedCategorySites} />
+												<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
 											</Col>
 
 										</Row>
@@ -85,6 +97,11 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 			.sites-list {
 				max-height: 500px;
 				overflow-y: auto;
+			}
+
+			.category-list .close,
+			.sites-list .close {
+				text-decoration: none;
 			}
 
 			.category-list .list-group-item {
