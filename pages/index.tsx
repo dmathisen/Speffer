@@ -11,9 +11,15 @@ import Col from 'react-bootstrap/Col';
 
 const Index = () => {
 	const [searchList, setSearchList]: any = useState(Utilities.getSearchSites());
+	const [selectedSearchEngine, setSelectedSearchEngine] = useState('google');
+
 	const searchCategories: string[] = Object.keys(searchList);
 
 	// update state
+	const onSearchEngineChange = (searchEngine: string = 'google') => {
+		setSelectedSearchEngine(searchEngine);
+	}
+
 	const addCategory = (category: string = ''): boolean => {
 		if (!Utilities.isAddCategoryValid(searchCategories, category)) return false;
 		
@@ -58,12 +64,12 @@ const Index = () => {
 			<Row className="text-center">
 				<Col>
 					<h1>Speffer</h1>
-					<SearchForm searchCategories={searchCategories} searchList={searchList} />
+					<SearchForm searchCategories={searchCategories} searchList={searchList} selectedSearchEngine={selectedSearchEngine} />
 				</Col>
 			</Row>
 			<Row>
 				<Col>
-					<Settings searchCategories={searchCategories} searchList={searchList} events={{ addCategory, removeCategory, addSite, removeSite }} />
+					<Settings searchCategories={searchCategories} searchList={searchList} events={{ addCategory, removeCategory, addSite, removeSite, onSearchEngineChange }} />
 				</Col>
 			</Row>
 		</Container>

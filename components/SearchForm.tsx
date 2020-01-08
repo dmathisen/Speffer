@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 
-const SearchForm = ({ searchCategories, searchList }: any) => {
+const SearchForm = ({ searchCategories, searchList, selectedSearchEngine }: any) => {
 	// state
 	const [selectedCategory, setSelectedCategory] = useState('');
 	const [searchText, setSearchText] = useState('');
@@ -14,12 +14,21 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 		e.preventDefault();
 		if (!selectedCategory.trim().length || !searchText.trim().length) return;
 
-		const base = 'https://www.google.com/search?q=';
+		let base;
+		switch(selectedSearchEngine) {
+			case 'google':
+				base = 'https://www.google.com/search?q=';
+				break;
+			case 'duckDuckGo':
+				base = 'https://duckduckgo.com/?q=';
+				break;
+		}
+
 		const siteQueryArr = searchList[selectedCategory].map((site: string, index: number) => {
 			return index === 0 ? `+site%3A${site}` : `+OR+site%3A${site}`;
 		})
 		const url = `${base}${searchText}${siteQueryArr.join('')}`;
-		window.location.href = url;
+		window.location.replace(url);
 	}
 
 	const handleSettingsBtnClick = (e: any) => {

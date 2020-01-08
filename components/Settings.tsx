@@ -5,6 +5,7 @@ import CategoryAdd from './CategoryAddForm';
 import SitesList from './SitesList';
 import SitesAdd from './SitesAddForm';
 
+import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -51,7 +52,29 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 		<div className="search-settings">
 			<Container>
 				<Row>
+					<Col>
 
+						{/* Search Engine Selection */}
+						<Form>
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>Search Engine</Form.Label>
+								<Col sm={10}>
+									<Form.Control as="select" className="mr-2" onChange={(e: any) => events.onSearchEngineChange(e.target.value)}>
+										<option value='google'>Google</option>
+										<option value='duckDuckGo'>DuckDuckGo</option>
+									</Form.Control>
+								</Col>
+							</Form.Group>
+						</Form>
+
+					</Col>
+				</Row>
+
+				<Row className="mb-3">
+					<Col><hr /></Col>
+				</Row>
+
+				<Row>
 					<Col>
 						{/* Categories */}
 						<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
@@ -63,7 +86,6 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 						<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
 						<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
 					</Col>
-
 				</Row>
 			</Container>
 		</div>
