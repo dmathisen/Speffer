@@ -5,7 +5,7 @@ const SitesList = ({ searchList, selectedCategory, onSiteRemoveClick }: any) => 
     return(<>
         <ListGroup className="sites-list" variant="flush">
             {
-                selectedCategory && selectedCategory.length ? searchList[selectedCategory].map((site: any, index: number) => (
+                selectedCategory?.length ? searchList[selectedCategory].map((site: any, index: number) => (
                     <ListGroup.Item as="div" action key={index} data-site={site}>
                         <Button onClick={onSiteRemoveClick} className="close" variant="link" aria-label="Close"><span aria-hidden="true">&times;</span></Button>
                         {site}

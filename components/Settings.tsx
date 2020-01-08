@@ -13,7 +13,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-const Customize = ({ searchCategories, searchList, events }: any) => {
+const Settings = ({ searchCategories, searchList, events }: any) => {
 	// state
 	const [selectedCategory, setSelectedCategory] = useState('');
 	const [categoryToAdd, setCategoryToAdd] = useState('');
@@ -52,45 +52,37 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 	}
 
 	return (<>
-		<Container>
-			<Row>
-				<Col>
-				
-					<Accordion defaultActiveKey="0">
-						<Card>
-							<Card.Header>
-								<Accordion.Toggle as={Button} variant="link" eventKey="0">Customize</Accordion.Toggle>
-							</Card.Header>
+		<Accordion defaultActiveKey="0">
+			<Card>
+				<Card.Header>
+					<Accordion.Toggle as={Button} variant="link" eventKey="0">Settings</Accordion.Toggle>
+				</Card.Header>
 
-							<Accordion.Collapse eventKey="0">
-								<Card.Body>
-									
-									<Container>
-										<Row>
+				<Accordion.Collapse eventKey="0">
+					<Card.Body>
+						
+						<Container>
+							<Row>
 
-											<Col>
-												{/* Categories */}
-												<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
-												<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} onCategoryRemoveClick={removeCategory} />
-											</Col>
+								<Col>
+									{/* Categories */}
+									<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
+									<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} onCategoryRemoveClick={removeCategory} />
+								</Col>
 
-											<Col>
-												{/* Sites */}
-												<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
-												<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
-											</Col>
+								<Col>
+									{/* Sites */}
+									<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
+									<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
+								</Col>
 
-										</Row>
-									</Container>
+							</Row>
+						</Container>
 
-								</Card.Body>
-							</Accordion.Collapse>
-						</Card>
-					</Accordion>
-
-				</Col>
-			</Row>
-		</Container>
+					</Card.Body>
+				</Accordion.Collapse>
+			</Card>
+		</Accordion>
 
 		<style global jsx>{`
 			.category-list,
@@ -111,4 +103,4 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 	</>);
 }
 
-export default Customize;
+export default Settings;

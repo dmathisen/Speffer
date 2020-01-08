@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import Head from 'next/head';
 
-import Header from '../components/Header';
 import SearchForm from '../components/SearchForm';
-import Customize from '../components/Customize';
+import Settings from '../components/Settings';
 import Utilities from '../components/Utilities';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Index = () => {
 	const [searchList, setSearchList]: any = useState(Utilities.getSearchSites());
@@ -50,15 +53,34 @@ const Index = () => {
 			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous" />
 		</Head>
-		
-		<Header />
-		<SearchForm searchCategories={searchCategories} searchList={searchList} />
-		<Customize searchCategories={searchCategories} searchList={searchList} events={{ addCategory, removeCategory, addSite, removeSite }} />
+
+		<Container>
+			<Row className="text-center align-items-center" style={{ height: '400px' }}>
+				<Col>
+					<h1>Speffer</h1>
+					<SearchForm searchCategories={searchCategories} searchList={searchList} />
+				</Col>
+			</Row>
+			<Row>
+				<Col>
+					<Settings searchCategories={searchCategories} searchList={searchList} events={{ addCategory, removeCategory, addSite, removeSite }} />
+				</Col>
+			</Row>
+		</Container>
 
 		<style global jsx>{`
 			body {
 				overflow-y: scroll;
 				background-image: url(./images/bg.png);
+			}
+
+			h1 {
+				margin: 20px 0;
+				font-size: 48pt;
+				font-family: 'Maven Pro', sans-serif;
+				font-weight: bold;
+				color: #fff;
+				text-shadow: 1px 1px 0 #333;
 			}
 		`}</style>
 	</>);
