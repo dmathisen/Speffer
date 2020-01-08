@@ -9,10 +9,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Accordion from 'react-bootstrap/Accordion';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-
 const Settings = ({ searchCategories, searchList, events }: any) => {
 	// state
 	const [selectedCategory, setSelectedCategory] = useState('');
@@ -52,39 +48,44 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 	}
 
 	return (<>
-		<Accordion defaultActiveKey="0">
-			<Card>
-				<Card.Header>
-					<Accordion.Toggle as={Button} variant="link" eventKey="0">Settings</Accordion.Toggle>
-				</Card.Header>
+		<div className="search-settings">
+			<Container>
+				<Row>
 
-				<Accordion.Collapse eventKey="0">
-					<Card.Body>
-						
-						<Container>
-							<Row>
+					<Col>
+						{/* Categories */}
+						<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
+						<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} onCategoryRemoveClick={removeCategory} />
+					</Col>
 
-								<Col>
-									{/* Categories */}
-									<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
-									<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} onCategoryRemoveClick={removeCategory} />
-								</Col>
+					<Col>
+						{/* Sites */}
+						<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
+						<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
+					</Col>
 
-								<Col>
-									{/* Sites */}
-									<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
-									<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
-								</Col>
-
-							</Row>
-						</Container>
-
-					</Card.Body>
-				</Accordion.Collapse>
-			</Card>
-		</Accordion>
+				</Row>
+			</Container>
+		</div>
 
 		<style global jsx>{`
+			.search-settings {
+				margin-top: 30px;
+				max-height: 0;
+				transition: max-height 0.25s ease-out;
+				overflow: hidden;
+				background: #fff;
+				border-radius: 8px;
+			}
+			.search-settings-visible {
+				max-height: 540px;
+				transition: max-height 0.25s ease-in;
+			}
+
+			.search-settings .container {
+				padding: 20px;
+			}
+
 			.category-list,
 			.sites-list {
 				max-height: 500px;

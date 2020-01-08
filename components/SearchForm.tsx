@@ -17,9 +17,16 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 		console.log('sites', searchList[selectedCategory].join(', '));
 	}
 
+	const handleSettingsBtnClick = (e: any) => {
+		document.querySelector('.search-settings')?.classList.toggle('search-settings-visible');
+		document.querySelector('.cog')?.classList.toggle('cog-active');
+	}
+
 	return(<>				
 		<Form inline onSubmit={handleSearchSubmit} className="mb-4">
 			<Form.Group className="mx-auto">
+
+				{/* category select */}
 				<Form.Control as="select" className="mr-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
 					<option value=''>Select Category</option>
 					{
@@ -29,12 +36,22 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 					}
 				</Form.Control>
 
+				{/* search bar */}
 				<Form.Control type="search" className="search-bar mr-2" onChange={(e: any) => setSearchText(e.target.value)}></Form.Control>
 
+				{/* search button */}
 				<Button type="submit">Search</Button>
+
+				{/* settings button */}
+				<Button type="button" variant="link" onClick={handleSettingsBtnClick}>
+					<img className="cog" src="./images/cog.svg" width="20" />
+					<span className="sr-only">Settings</span>
+				</Button>
+				
 			</Form.Group>
 		</Form>
 		
+		{/* show list of search sites */}
 		{ selectedCategory.trim().length ? <div>Sites to search:</div> : '' }
 		{
 			selectedCategory.trim().length ? searchList[selectedCategory].map((site: string) => 
@@ -45,6 +62,13 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 		<style global jsx>{`
 			.search-bar {
 				min-width: 300px;
+			}
+
+			.cog {
+				transition: transform .3s ease-in-out;
+			}
+			.cog-active {
+				transform:rotate(180deg);
 			}
 		`}</style>
 	</>);

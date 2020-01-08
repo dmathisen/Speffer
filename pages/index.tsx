@@ -55,7 +55,7 @@ const Index = () => {
 		</Head>
 
 		<Container>
-			<Row className="text-center align-items-center" style={{ height: '400px' }}>
+			<Row className="text-center">
 				<Col>
 					<h1>Speffer</h1>
 					<SearchForm searchCategories={searchCategories} searchList={searchList} />
@@ -75,7 +75,7 @@ const Index = () => {
 			}
 
 			h1 {
-				margin: 20px 0;
+				margin: 50px 0 30px;
 				font-size: 48pt;
 				font-family: 'Maven Pro', sans-serif;
 				font-weight: bold;
