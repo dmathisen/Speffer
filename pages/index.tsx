@@ -30,13 +30,13 @@ const Index = () => {
 	const addSite = (category: string = '', site: string = ''): boolean => {
 		if (!Utilities.isAddSiteValid(searchCategories, category, searchList, site)) return false;
 
-		let updatedCategory: any[] = searchList[category];
+		let updatedCategory = searchList[category];
 		updatedCategory.unshift(site);
 		setSearchList({ ...searchList, [category]: updatedCategory });
 		return true;
 	};
 
-	const removeSite = (category: string = '', site: string = '') => {
+	const removeSite = (category: string = '', site: string = ''): boolean => {
 		if (!Utilities.isRemoveSiteValid(searchCategories, category, searchList, site)) return false;
 
 		let updatedCategory = searchList[category].filter((s: string) => s !== site)

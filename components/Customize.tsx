@@ -15,9 +15,9 @@ import Card from 'react-bootstrap/Card';
 
 const Customize = ({ searchCategories, searchList, events }: any) => {
 	// state
-	const [selectedCategory, setSelectedCategory]: any = useState('');
-	const [categoryToAdd, setCategoryToAdd]: any = useState('');
-	const [siteToAdd, setSiteToAdd]: any = useState('');
+	const [selectedCategory, setSelectedCategory] = useState('');
+	const [categoryToAdd, setCategoryToAdd] = useState('');
+	const [siteToAdd, setSiteToAdd] = useState('');
 
 	//  events
 	const handleCategorySelect = (e: any) => {
@@ -39,15 +39,15 @@ const Customize = ({ searchCategories, searchList, events }: any) => {
 
 	const removeCategory = (e: any) => {
 		e.preventDefault();
-		const el: HTMLElement = e.target.closest('.list-group-item');
-		const category: string | undefined = el.dataset.category;
+		const el = e.target.closest('.list-group-item');
+		const category = el.dataset.category;
 		events.removeCategory(category);
 	}
 
 	const removeSite = (e: any) => {
 		e.preventDefault();
-		const el: HTMLElement = e.target.closest('.list-group-item');
-		const site: string | undefined = el.dataset.site;
+		const el = e.target.closest('.list-group-item');
+		const site = el.dataset.site;
 		events.removeSite(selectedCategory, site);
 	}
 

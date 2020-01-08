@@ -5,7 +5,7 @@ const CategoryList = ({ searchCategories, onCategoryClick, onCategoryRemoveClick
     return(<>
         <ListGroup className="category-list">
             {
-                searchCategories.map((category: any, index: number) => (
+                searchCategories.map((category: string, index: number) => (
                     <ListGroup.Item onClick={onCategoryClick} as="div" action key={index} data-category={category}>
                         <Button onClick={onCategoryRemoveClick} className="close" variant="link" aria-label="Close"><span aria-hidden="true">&times;</span></Button>
                         {category}
