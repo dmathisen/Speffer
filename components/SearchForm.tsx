@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Form from 'react-bootstrap/Form';
+import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 
 const SearchForm = ({ searchCategories, searchList }: any) => {
@@ -16,14 +17,8 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 		console.log('sites', searchList[selectedCategory].join(', '));
 	}
 
-	// helpers
-	const getSitesToSearch = () => {
-		if (!selectedCategory.trim().length) return '';
-		return searchList[selectedCategory].join(', ');
-	}
-
 	return(<>				
-		<Form inline onSubmit={handleSearchSubmit}>
+		<Form inline onSubmit={handleSearchSubmit} className="mb-4">
 			<Form.Group className="mx-auto">
 				<Form.Control as="select" className="mr-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
 					<option value=''>Select Category</option>
@@ -40,10 +35,12 @@ const SearchForm = ({ searchCategories, searchList }: any) => {
 			</Form.Group>
 		</Form>
 		
-		<br/>
-		Selected Cat: {selectedCategory}<br/>
-		Search Text: {searchText}<br/>
-		Sites to search: { getSitesToSearch() }
+		{ selectedCategory.trim().length ? <div>Sites to search:</div> : '' }
+		{
+			selectedCategory.trim().length ? searchList[selectedCategory].map((site: string) => 
+				<Badge variant="secondary" className="mr-2">{site}</Badge>
+			) : ''
+		}
 
 		<style global jsx>{`
 			.search-bar {
