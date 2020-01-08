@@ -13,9 +13,8 @@
   "homepage": "https://speffer.com",
   "scripts": {
     "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "export": "next export"
+    "build": "next build && next export",
+    "start": "next start"
   },
   "dependencies": {
     "bootstrap": "^4.4.1",

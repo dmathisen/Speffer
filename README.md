@@ -15,6 +15,4 @@ Run `npm run dev`
 ### Deployment
 Run `npm run build`
 
-Run `npm run export`
-
 Copy files in `out` directory to webserver
