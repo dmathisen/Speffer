@@ -48,11 +48,11 @@ const SearchForm = ({ searchCategories, searchList, selectedSearchEngine }: any)
 			<Form.Control type="search" className="mb-2 mr-sm-2" onChange={(e: any) => setSearchText(e.target.value)}></Form.Control>
 
 			{/* search button */}
-			<Button type="submit" className="mb-2 mr-sm-2">Search</Button>
+			<Button type="submit" className="mb-2">Search</Button>
 
 			{/* settings button */}
 			<Button type="button" className="mb-2 mr-sm-2" variant="link" onClick={handleSettingsBtnClick}>
-				<img className="cog" src="./images/cog.svg" width="20" />
+				<img className="cog" src="./images/cog.png" />
 				<span className="sr-only">Settings</span>
 			</Button>
 		</Form>
