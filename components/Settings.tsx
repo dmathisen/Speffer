@@ -21,6 +21,10 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 	const handleCategorySelect = (e: any) => {
 		e.preventDefault();
 		setSelectedCategory(e.target.dataset.category);
+
+		// handle active class
+		e.target.parentElement.childNodes.forEach((el: HTMLElement) => el.classList.remove('active'))
+		e.target.classList.add('active');
 	}
 
 	const addCategory = (e: any) => {
@@ -95,12 +99,12 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 		<style global jsx>{`
 			.search-settings {
 				max-height: 0;
-				transition: max-height 0.25s ease-out;
+				transition: max-height 0.35s ease-out;
 				overflow: hidden;
 			}
 			.search-settings-visible {
 				max-height: 1000px;
-				transition: max-height 0.25s ease-in;
+				transition: max-height 0.35s ease-in;
 			}
 
 			.category-list,
@@ -123,6 +127,15 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 			}
 			.card-body {
 				padding: .75rem;
+			}
+
+			.list-group-item {
+				padding: .5rem 1rem;
+			}
+
+			.list-group-item.active {
+				background-color: #28a745;
+				border-color: #28a745;
 			}
 		`}</style>
 	</>);

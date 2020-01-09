@@ -4,11 +4,11 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 const CategoryAdd = ({ categoryToAdd, onSubmit, onInputChange }: any) => {
     return(<>
-        <Form inline onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit}>
             <InputGroup className="mb-3">
                 <Form.Control type="text" placeholder="Add Category" onChange={onInputChange} value={categoryToAdd}></Form.Control>
                 <InputGroup.Append>
-                    <Button type="submit" variant="success">+</Button>
+				<Button type="submit" variant="success"><strong>+</strong> <span className="sr-only">add category</span></Button>
                 </InputGroup.Append>
             </InputGroup>
         </Form>
