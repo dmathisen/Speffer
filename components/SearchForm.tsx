@@ -37,35 +37,27 @@ const SearchForm = ({ searchCategories, searchList, selectedSearchEngine }: any)
 	}
 
 	return(<>				
-		<Form inline onSubmit={handleSearchSubmit} className="mb-4">
-			<Form.Group className="mx-auto">
+		<Form inline onSubmit={handleSearchSubmit} className="mb-4 justify-content-center">
+			{/* category select */}
+			<Form.Control as="select" className="mb-2 mr-sm-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
+				<option value=''>Select Category</option>
+				{ searchCategories.map((category: any, index: number) => <option key={index} value={category}>{category}</option>) }
+			</Form.Control>
 
-				{/* category select */}
-				<Form.Control as="select" className="mr-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
-					<option value=''>Select Category</option>
-					{
-						searchCategories.map((category: any, index: number) => 
-							<option key={index} value={category}>{category}</option>
-						)
-					}
-				</Form.Control>
+			{/* search bar */}
+			<Form.Control type="search" className="mb-2 mr-sm-2" onChange={(e: any) => setSearchText(e.target.value)}></Form.Control>
 
-				{/* search bar */}
-				<Form.Control type="search" className="search-bar mr-2" onChange={(e: any) => setSearchText(e.target.value)}></Form.Control>
+			{/* search button */}
+			<Button type="submit" className="mb-2 mr-sm-2">Search</Button>
 
-				{/* search button */}
-				<Button type="submit">Search</Button>
-
-				{/* settings button */}
-				<Button type="button" variant="link" onClick={handleSettingsBtnClick}>
-					<img className="cog" src="./images/cog.svg" width="20" />
-					<span className="sr-only">Settings</span>
-				</Button>
-				
-			</Form.Group>
+			{/* settings button */}
+			<Button type="button" className="mb-2 mr-sm-2" variant="link" onClick={handleSettingsBtnClick}>
+				<img className="cog" src="./images/cog.svg" width="20" />
+				<span className="sr-only">Settings</span>
+			</Button>
 		</Form>
 		
-		{/* show list of search sites */}
+		{/* list of search sites */}
 		{ selectedCategory.trim().length ? <div>Sites to search:</div> : '' }
 		{
 			selectedCategory.trim().length ? searchList[selectedCategory].map((site: string, index: number) => 
@@ -74,10 +66,6 @@ const SearchForm = ({ searchCategories, searchList, selectedSearchEngine }: any)
 		}
 
 		<style global jsx>{`
-			.search-bar {
-				min-width: 300px;
-			}
-
 			.cog {
 				transition: transform .3s ease-in-out;
 			}

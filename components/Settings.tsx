@@ -6,7 +6,8 @@ import SitesList from './SitesList';
 import SitesAdd from './SitesAddForm';
 
 import Form from 'react-bootstrap/Form';
-import Container from 'react-bootstrap/Container';
+import Card from 'react-bootstrap/Card';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -50,62 +51,56 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 
 	return (<>
 		<div className="search-settings">
-			<Container>
-				<Row>
-					<Col>
 
-						{/* Search Engine Selection */}
-						<Form>
-							<Form.Group as={Row} controlId="formHorizontalEmail">
-								<Form.Label column sm={2}>Search Engine</Form.Label>
-								<Col sm={10}>
-									<Form.Control as="select" className="mr-2" onChange={(e: any) => events.onSearchEngineChange(e.target.value)}>
-										<option value='google'>Google</option>
-										<option value='duckDuckGo'>DuckDuckGo</option>
-									</Form.Control>
-								</Col>
-							</Form.Group>
-						</Form>
+			{/* Search Engine Selection */}
+			<Card className="mb-4">
+				<Card.Header>Search Engine</Card.Header>
+				<Card.Body>
+					<Form>
+						<Form.Control as="select" onChange={(e: any) => events.onSearchEngineChange(e.target.value)}>
+							<option value='google'>Google</option>
+							<option value='duckDuckGo'>DuckDuckGo</option>
+						</Form.Control>
+					</Form>
+				</Card.Body>
+			</Card>
 
-					</Col>
-				</Row>
+			<Row className="row-cols-1 row-cols-md-2">
+				<Col className="mb-4">
+					{/* Search Categories */}
+					<Card>
+						<Card.Header>Search Categories</Card.Header>
+						<Card.Body>
+							<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
+							<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} onCategoryRemoveClick={removeCategory} />
+						</Card.Body>
+					</Card>
+				</Col>
 
-				<Row className="mb-3">
-					<Col><hr /></Col>
-				</Row>
+				<Col className="mb-4">
+					{/* Category Settings */}
+					<Card>
+						<Card.Header>Category Settings</Card.Header>
+						<Card.Body>
+							{ selectedCategory?.trim().length ? '' : 'Select a category to edit settings' }
+							<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
+							<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
+						</Card.Body>
+					</Card>
+				</Col>
+			</Row>
 
-				<Row>
-					<Col>
-						{/* Categories */}
-						<CategoryAdd categoryToAdd={categoryToAdd} onSubmit={addCategory} onInputChange={(e: any) => setCategoryToAdd(e.target.value)} />
-						<CategoryList searchCategories={searchCategories} onCategoryClick={handleCategorySelect} onCategoryRemoveClick={removeCategory} />
-					</Col>
-
-					<Col>
-						{/* Sites */}
-						<SitesAdd siteToAdd={siteToAdd} selectedCategory={selectedCategory} onSubmit={addSite} onInputChange={(e: any) => setSiteToAdd(e.target.value)} />
-						<SitesList searchList={searchList} selectedCategory={selectedCategory} onSiteRemoveClick={removeSite} />
-					</Col>
-				</Row>
-			</Container>
 		</div>
 
 		<style global jsx>{`
 			.search-settings {
-				margin-top: 30px;
 				max-height: 0;
 				transition: max-height 0.25s ease-out;
 				overflow: hidden;
-				background: #fff;
-				border-radius: 8px;
 			}
 			.search-settings-visible {
-				max-height: 540px;
+				max-height: 1000px;
 				transition: max-height 0.25s ease-in;
-			}
-
-			.search-settings .container {
-				padding: 20px;
 			}
 
 			.category-list,
@@ -121,6 +116,13 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 
 			.category-list .list-group-item {
 				cursor: pointer;
+			}
+
+			.card-header {
+				padding: .5rem .75rem;
+			}
+			.card-body {
+				padding: .75rem;
 			}
 		`}</style>
 	</>);
