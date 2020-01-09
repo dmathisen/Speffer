@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
 import SearchForm from '../components/SearchForm';
@@ -9,11 +9,18 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const Index = () => {
-	const [searchList, setSearchList]: any = useState(Utilities.getSearchSites());
-	const [selectedSearchEngine, setSelectedSearchEngine] = useState('google');
-
+const Index = (props: any) => {
+	const [searchList, setSearchList]: any = useState(props.searchList);
+	const [selectedSearchEngine, setSelectedSearchEngine] = useState(props.selectedSearchEngine);
 	const searchCategories: string[] = Object.keys(searchList);
+
+	useEffect(() => {
+		localStorage.setItem('searchList', JSON.stringify(searchList));
+	}, [searchList])
+
+	useEffect(() => {
+		localStorage.setItem('selectedSearchEngine', JSON.stringify(selectedSearchEngine));
+	}, [selectedSearchEngine])
 
 	// update state
 	const onSearchEngineChange = (searchEngine: string = 'google') => {
@@ -91,5 +98,12 @@ const Index = () => {
 		`}</style>
 	</>);
 };
+
+Index.getInitialProps = async () => {
+	return {
+		searchList: Utilities.getSearchSites(),
+		selectedSearchEngine: Utilities.getSelectedSearchEngine()
+	}
+  }
 
 export default Index;

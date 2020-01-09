@@ -81,14 +81,27 @@ const Utilities = {
 	getSearchSites() {
 		// get from local storage, if it exists
 		if (process.browser) {
-			const localStorageData = window.localStorage.getItem('searchSites');
+			const localStorageData = window.localStorage.getItem('searchList');
 			if (localStorageData) {
-				return localStorageData;
+				return JSON.parse(localStorageData);
 			}
 		}
 	
 		// if not, get data from /data/sites.json
 		return SearchList;
+	},
+
+	getSelectedSearchEngine() {
+		// get from local storage, if it exists
+		if (process.browser) {
+			const localStorageData = window.localStorage.getItem('selectedSearchEngine');
+			if (localStorageData) {
+				return JSON.parse(localStorageData);
+			}
+		}
+
+		// default to google
+		return 'google';
 	}
 }
 
