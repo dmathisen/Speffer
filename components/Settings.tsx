@@ -54,7 +54,7 @@ const Settings = ({ searchCategories, searchList, events }: any) => {
 	}
 
 	return (<>
-		<div className="search-settings">
+		<div className="search-settings mt-5">
 
 			{/* Search Engine Selection */}
 			<Card className="mb-4">

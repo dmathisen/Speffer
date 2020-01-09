@@ -62,15 +62,16 @@ const Index = (props: any) => {
 
 	return(<>
 		<Head>
-			<title>Speffer - Site Search Specifier</title>
+			<title>Speffer - Search Engine Customization</title>
 			<meta name="viewport" content="initial-scale=1.0, width=device-width" />
-			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous" />
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="" crossOrigin="anonymous" />
 		</Head>
 
 		<Container>
 			<Row className="text-center">
 				<Col>
 					<h1>Speffer</h1>
+					<h2>Customize your searches to get better results...</h2>
 					<SearchForm searchCategories={searchCategories} searchList={searchList} selectedSearchEngine={selectedSearchEngine} />
 				</Col>
 			</Row>
@@ -88,12 +89,18 @@ const Index = (props: any) => {
 			}
 
 			h1 {
-				margin: 50px 0 30px;
-				font-size: 48pt;
+				margin: 3rem 0 2rem;
+				font-size: 4rem;
 				font-family: 'Maven Pro', sans-serif;
 				font-weight: bold;
 				color: #fff;
 				text-shadow: 1px 1px 0 #333;
+			}
+
+			h2 {
+				font-size: 1.25rem;
+				color: #777;
+				margin-bottom: 1rem;
 			}
 		`}</style>
 	</>);
