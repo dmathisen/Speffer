@@ -15,6 +15,8 @@ const SearchForm = () => {
 	const [ selectedCategory, setSelectedCategory ] = useState('');
 	const [searchText, setSearchText] = useState('');
 
+	const categoryIsSelected: boolean = !!selectedCategory.trim().length;
+
 	//  events
 	const handleSettingsBtnClick = (e: any) => {
 		document.querySelector('.search-settings')?.classList.toggle('search-settings-visible');
@@ -32,7 +34,7 @@ const SearchForm = () => {
 	return(<>				
 		<Form inline onSubmit={handleSearchSubmit} className="mb-4 justify-content-center">
 			<Form.Control as="select" className="mb-2 mr-sm-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
-				<option value=''>Select Category</option>
+				<option value=''>- Select Category -</option>
 				{ searchCategories.map((category: any, index: number) => <option key={index} value={category}>{category}</option>) }
 			</Form.Control>
 			<Form.Control type="search" className="mb-2 mr-sm-2" onChange={(e: any) => setSearchText(e.target.value)}></Form.Control>
@@ -43,11 +45,11 @@ const SearchForm = () => {
 			</Button>
 		</Form>
 		
-		<div style={{visibility: selectedCategory?.trim().length ? 'visible' : 'hidden' }}>
+		<div style={{display: categoryIsSelected ? 'block' : 'none' }}>
 			{/* list of search sites */}
 			Sites to search:<br/>
 			{
-				searchSettings?[selectedCategory].map((site: string, index: number) => 
+				categoryIsSelected ? searchSettings[selectedCategory].map((site: string, index: number) => 
 					<a href={'http://' + site} target="_blank"><Badge variant="secondary" className="mr-2" key={index}>{site}</Badge></a>
 				) : ''
 			}
