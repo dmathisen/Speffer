@@ -5,14 +5,15 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-const CategoryAdd = () => {
+const CategoryAdd = ({ handleCategoryAdd }: any) => {
     const { addCategory } = useContext(SearchSettingsContext as any);
     const [ category, setCategory ] = useState('');
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
         addCategory(category);
-        setCategory('');
+		setCategory('');
+		handleCategoryAdd(category)
     }
 
     return(<>

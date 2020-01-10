@@ -22,6 +22,11 @@ const Settings = () => {
 		e.target.classList.add('active');
 	}
 
+	const handleCategoryAdd = (category: string) => {
+		setSelectedCategory(category);
+		(document.querySelector('.add-site') as HTMLElement).focus();
+	}
+
 	return (<>
 		<div className="search-settings mt-5">
 
@@ -39,7 +44,7 @@ const Settings = () => {
 					<Card>
 						<Card.Header>Search Categories</Card.Header>
 						<Card.Body>
-							<CategoryAdd />
+							<CategoryAdd handleCategoryAdd={handleCategoryAdd} />
 							<CategoryList handleCategorySelect={handleCategorySelect} />
 						</Card.Body>
 					</Card>

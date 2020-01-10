@@ -18,7 +18,7 @@ const SitesAdd = ({ selectedCategory }: any) => {
     return(<>
         <Form onSubmit={handleSubmit} style={{visibility: selectedCategory?.trim().length ? 'visible' : 'hidden' }}>
             <InputGroup className="mb-3">
-                <Form.Control type="text" placeholder="Add Site (ex: reddit.com)" onChange={(e: any) => setSite(e.target.value)} value={site}></Form.Control>
+                <Form.Control type="text" className="add-site" placeholder="Add Site (ex: reddit.com)" onChange={(e: any) => setSite(e.target.value)} value={site}></Form.Control>
                 <InputGroup.Append>
                     <Button type="submit" variant="success"><strong>+</strong> <span className="sr-only">add site</span></Button>
                 </InputGroup.Append>
