@@ -8,6 +8,7 @@ import SearchEngineForm from './SearchEngineForm';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Badge from 'react-bootstrap/Badge';
 import Card from 'react-bootstrap/Card';
 
 const Settings = () => {
@@ -32,7 +33,10 @@ const Settings = () => {
 
 			{/* Search Engine Selection */}
 			<Card className="mb-4">
-				<Card.Header>Search Engine</Card.Header>
+				<Card.Header>
+					<Badge variant="secondary" className="mr-2">1</Badge>
+					Set your preferred search engine
+				</Card.Header>
 				<Card.Body>
 					<SearchEngineForm />
 				</Card.Body>
@@ -42,7 +46,10 @@ const Settings = () => {
 				<Col className="mb-4">
 					{/* Search Categories */}
 					<Card>
-						<Card.Header>Search Categories</Card.Header>
+						<Card.Header>
+							<Badge variant="secondary" className="mr-2">2</Badge>
+							Set up your search categories
+						</Card.Header>
 						<Card.Body>
 							<CategoryAdd handleCategoryAdd={handleCategoryAdd} />
 							<CategoryList handleCategorySelect={handleCategorySelect} />
@@ -53,7 +60,10 @@ const Settings = () => {
 				<Col className="mb-4">
 					{/* Category Settings */}
 					<Card>
-						<Card.Header>Category Settings</Card.Header>
+						<Card.Header>
+							<Badge variant="secondary" className="mr-2">3</Badge>
+							Customize websites to search
+						</Card.Header>
 						<Card.Body>
 							{ selectedCategory?.trim().length ? '' : 'Select a category to edit settings' }
 
