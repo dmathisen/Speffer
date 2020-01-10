@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import Utilities from '../components/Utilities';
 
 export const SearchSettingsContext = createContext({});
@@ -39,6 +39,10 @@ const SearchSettingsContextProvider = (props: any) => {
 		setSearchSettings({ ...searchSettings, [category]: updatedCategory });
 		return true;
 	};
+
+	useEffect(() => {
+		localStorage.setItem('searchSettings', JSON.stringify(searchSettings))
+	}, [searchSettings]);
     
     return (
         <SearchSettingsContext.Provider value={{ searchSettings, searchCategories, addCategory, removeCategory, addSite, removeSite }}>

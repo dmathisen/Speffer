@@ -26,7 +26,7 @@ const SearchForm = () => {
 		if (!selectedCategory.trim().length || !searchText.trim().length) return;
 
 		const searchUrl = Utilities.getSearchUrl(selectedSearchEngine, searchSettings[selectedCategory], searchText);
-		window.location.replace(searchUrl);
+		window.location.href = searchUrl;
 	}
 
 	return(<>				

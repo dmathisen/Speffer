@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import Utilities from '../components/Utilities';
 
 export const SearchEngineContext = createContext({});
@@ -9,6 +9,10 @@ const SearchEngineContextProvider = (props: any) => {
     const setSearchEngine = (searchEngine: string) => {
         setSelectedSearchEngine(searchEngine);
     }
+	
+	useEffect(() => {
+		localStorage.setItem('searchSettings', JSON.stringify(selectedSearchEngine))
+	}, [selectedSearchEngine]);
     
     return (
         <SearchEngineContext.Provider value={{ selectedSearchEngine, setSearchEngine }}>
