@@ -1,39 +1,42 @@
 const DefaultSearchSettings = {
-	"Web Development": [
+	"Development": [
 		"developer.mozilla.org",
-		"w3.org",
-		"php.net",
 		"msdn.microsoft.com",
+		"devdocs.io",
+		"stackoverflow.com"
+	],
+
+	"Front End": [
+		"medium.com",
 		"css-tricks.com",
 		"tutsplus.com",
-		"zeldman.com",
 		"sitepoint.com",
 		"webdesignerdepot.com",
-		"456bereastreet.com",
-		"addyosmani.com",
 		"davidwalsh.name",
-		"nimbupani.com",
 		"lea.verou.me",
-		"snook.ca",
-		"standardista.com",
-		"meyerweb.com",
-		"toddmotto.com"
+		"ultimatecourses.com"
 	],
 
 	"Design": [
 		"dribbble.com",
+		"behance.net",
 		"designspiration.net",
-		"creattica.com",
-		"abduzeedo.com",
-		"webcreme.com",
 		"webdesignledger.com",
-		"cssdsgn.com",
-		"awwwards.com",
-		"webbyawards.com",
 		"siteinspire.com",
 		"cssline.com",
-		"behance.net",
-		"designshack.net"
+		"designshack.net",
+		"vandelaydesign.com"
+	],
+
+	"Stock Photos": [
+		"shutterstock.com",
+		"istockphoto.com",
+		"gettyimages.com",
+		"wunderstock.com",
+		"storyblocks.com",
+		"pixabay.com",
+		"unsplash.com",
+		"pexels.com"
 	]
 };
 

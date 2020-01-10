@@ -47,7 +47,7 @@ const SearchForm = () => {
 		{ selectedCategory.trim().length ? <div>Sites to search:</div> : '' }
 		{
 			selectedCategory.trim().length ? searchSettings[selectedCategory].map((site: string, index: number) => 
-				<Badge variant="secondary" className="mr-2" key={index}>{site}</Badge>
+				<a href={'http://' + site} target="_blank"><Badge variant="secondary" className="mr-2" key={index}>{site}</Badge></a>
 			) : ''
 		}
 
