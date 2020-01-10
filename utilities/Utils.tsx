@@ -27,7 +27,7 @@ const Utils = {
 	getSelectedSearchEngine() {
 		// get from local storage, if it exists
 		if (process.browser) {
-			const localStorageData = localStorage.getItem('selectedSearchEngine');
+			const localStorageData = localStorage.getItem('searchEngine');
 			return localStorageData ? localStorageData : 'google';
 		}
 		return '';

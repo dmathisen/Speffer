@@ -4,11 +4,12 @@ import { SearchEngineContext } from '../contexts/SearchEngineContext';
 import Form from 'react-bootstrap/Form';
 
 const SearchEngineForm = () => {
-    const { setSearchEngine }: any = useContext(SearchEngineContext as any);
+	const { selectedSearchEngine, setSearchEngine }: any = useContext(SearchEngineContext as any);
+	console.log('selectedSearchEngine', selectedSearchEngine)
 
     return (<>
         <Form>
-            <Form.Control as="select" onChange={(e: any) => setSearchEngine(e.target.value)}>
+            <Form.Control as="select" value={selectedSearchEngine} onChange={(e: any) => setSearchEngine(e.target.value)}>
                 <option value='google'>Google</option>
                 <option value='duckDuckGo'>DuckDuckGo</option>
 				<option value='bing'>Bing</option>
