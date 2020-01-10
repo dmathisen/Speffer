@@ -11,6 +11,7 @@ const SearchEngineForm = () => {
             <Form.Control as="select" onChange={(e: any) => setSearchEngine(e.target.value)}>
                 <option value='google'>Google</option>
                 <option value='duckDuckGo'>DuckDuckGo</option>
+				<option value='bing'>Bing</option>
             </Form.Control>
         </Form>
     </>)

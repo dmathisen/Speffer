@@ -21,8 +21,6 @@ const Utils = {
 			const localStorageData = localStorage.getItem('searchSettings');
 			return localStorageData ? JSON.parse(localStorageData) : DefaultSearchSettings;
 		}
-	
-		// if not, get data from /data/DefaultSearchSettings.json
 		return {};
 	},
 
@@ -32,8 +30,6 @@ const Utils = {
 			const localStorageData = localStorage.getItem('selectedSearchEngine');
 			return localStorageData ? localStorageData : 'google';
 		}
-
-		// default to google
 		return '';
 	},
 
@@ -42,13 +38,14 @@ const Utils = {
 		switch(selectedSearchEngine) {
 			case 'google': base = 'https://www.google.com/search?q='; break;
 			case 'duckDuckGo': base = 'https://duckduckgo.com/?q='; break;
+			case 'bing': base = 'https://www.bing.com/search?q='; break;
 		}
 
 		const siteQueryArr = sites.map((site: string, index: number) => {
-			return index === 0 ? `+site%3A${site}` : `+OR+site%3A${site}`;
+			return index === 0 ? `site%3A${site}` : `+OR+site%3A${site}`;
 		})
 
-		return `${base}${searchText}${siteQueryArr.join('')}`;
+		return `${base}${searchText} (${siteQueryArr.join('')})`;
 	}
 }
 
