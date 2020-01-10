@@ -102,6 +102,20 @@ const Utilities = {
 
 		// default to google
 		return 'google';
+	},
+
+	getSearchUrl(selectedSearchEngine: string, sites: string[], searchText: string) {
+		let base;
+		switch(selectedSearchEngine) {
+			case 'google': base = 'https://www.google.com/search?q='; break;
+			case 'duckDuckGo': base = 'https://duckduckgo.com/?q='; break;
+		}
+
+		const siteQueryArr = sites.map((site: string, index: number) => {
+			return index === 0 ? `+site%3A${site}` : `+OR+site%3A${site}`;
+		})
+
+		return `${base}${searchText}${siteQueryArr.join('')}`;
 	}
 }
 
