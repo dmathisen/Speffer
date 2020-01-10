@@ -43,13 +43,15 @@ const SearchForm = () => {
 			</Button>
 		</Form>
 		
-		{/* list of search sites */}
-		{ selectedCategory.trim().length ? <div>Sites to search:</div> : '' }
-		{
-			selectedCategory.trim().length ? searchSettings[selectedCategory].map((site: string, index: number) => 
-				<a href={'http://' + site} target="_blank"><Badge variant="secondary" className="mr-2" key={index}>{site}</Badge></a>
-			) : ''
-		}
+		<div style={{visibility: selectedCategory?.trim().length ? 'visible' : 'hidden' }}>
+			{/* list of search sites */}
+			Sites to search:<br/>
+			{
+				searchSettings?[selectedCategory].map((site: string, index: number) => 
+					<a href={'http://' + site} target="_blank"><Badge variant="secondary" className="mr-2" key={index}>{site}</Badge></a>
+				) : ''
+			}
+		</div>
 
 		<style global jsx>{`
 			.cog {
