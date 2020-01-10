@@ -12,7 +12,7 @@ const CategoryList = ({ handleCategorySelect }: any) => {
             {
                 searchCategories.map((category: string, index: number) => (
                     <ListGroup.Item onClick={handleCategorySelect} as="div" action key={index} data-category={category}>
-                        <Button onClick={() => removeCategory({category})} className="close" variant="link" aria-label="Close"><span aria-hidden="true">&times;</span></Button>
+                        <Button onClick={() => removeCategory(category)} className="close" variant="link" aria-label="Close"><span aria-hidden="true">&times;</span></Button>
                         {category}
                     </ListGroup.Item>
                 ))

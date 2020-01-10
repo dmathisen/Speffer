@@ -19,9 +19,7 @@ const Utils = {
 		// get from local storage, if it exists
 		if (process.browser) {
 			const localStorageData = localStorage.getItem('searchSettings');
-			if (localStorageData) {
-				return JSON.parse(localStorageData);
-			}
+			if (localStorageData) return JSON.parse(localStorageData);
 		}
 	
 		// if not, get data from /data/DefaultSearchSettings.json
@@ -32,9 +30,7 @@ const Utils = {
 		// get from local storage, if it exists
 		if (process.browser) {
 			const localStorageData = localStorage.getItem('selectedSearchEngine');
-			if (localStorageData) {
-				return JSON.parse(localStorageData);
-			}
+			if (localStorageData) return localStorageData;
 		}
 
 		// default to google

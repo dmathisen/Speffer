@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import Utils from '../utilities/Utils';
 import Validation from '../utilities/Validation';
 
@@ -7,12 +7,17 @@ export const SearchSettingsContext = createContext({});
 const SearchSettingsContextProvider = (props: any) => {
 	const [searchSettings, setSearchSettings]: any = useState(Utils.getSearchSettings());
 	const searchCategories: string[] = Object.keys(searchSettings);
+
+	const updateLocalStorage = (updatedSearchSettings: any) => {
+		localStorage.setItem('searchSettings', JSON.stringify(updatedSearchSettings));
+	}
     
     const addCategory = (category: string = '') => {
 		if (!Validation.isAddCategoryValid(searchCategories, category)) return false;
 		
-		setSearchSettings({ [category]: [], ...searchSettings });
-		return true;
+		let updatedSearchSettings = { [category]: [], ...searchSettings }
+		setSearchSettings(updatedSearchSettings);
+		updateLocalStorage(updatedSearchSettings);
 	};
     
     const removeCategory = (category: string = '') => {
@@ -21,7 +26,7 @@ const SearchSettingsContextProvider = (props: any) => {
 		let updatedSearchSettings = {...searchSettings};
 		delete updatedSearchSettings[category];
 		setSearchSettings(updatedSearchSettings);
-		return true;
+		updateLocalStorage(updatedSearchSettings);
     };
     
     const addSite = (category: string = '', site: string = '') => {
@@ -29,21 +34,19 @@ const SearchSettingsContextProvider = (props: any) => {
 
 		let updatedCategory = searchSettings[category];
 		updatedCategory.unshift(site);
-		setSearchSettings({ ...searchSettings, [category]: updatedCategory });
-		return true;
+		let updatedSearchSettings = { ...searchSettings, [category]: updatedCategory };
+		setSearchSettings(updatedSearchSettings);
+		updateLocalStorage(updatedSearchSettings);
 	};
 
 	const removeSite = (category: string = '', site: string = '') => {
 		if (!Validation.isRemoveSiteValid(searchCategories, category, searchSettings, site)) return false;
 
 		let updatedCategory = searchSettings[category].filter((s: string) => s !== site)
-		setSearchSettings({ ...searchSettings, [category]: updatedCategory });
-		return true;
+		let updatedSearchSettings = { ...searchSettings, [category]: updatedCategory };
+		setSearchSettings(updatedSearchSettings);
+		updateLocalStorage(updatedSearchSettings);
 	};
-
-	useEffect(() => {
-		localStorage.setItem('searchSettings', JSON.stringify(searchSettings))
-	}, [searchSettings]);
     
     return (
         <SearchSettingsContext.Provider value={{ searchSettings, searchCategories, addCategory, removeCategory, addSite, removeSite }}>
