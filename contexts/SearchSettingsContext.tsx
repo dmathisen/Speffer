@@ -1,21 +1,22 @@
 import React, { createContext, useState, useEffect } from 'react';
-import Utilities from '../components/Utilities';
+import Utils from '../utilities/Utils';
+import Validation from '../utilities/Validation';
 
 export const SearchSettingsContext = createContext({});
 
 const SearchSettingsContextProvider = (props: any) => {
-	const [searchSettings, setSearchSettings]: any = useState(Utilities.getSearchSites());
+	const [searchSettings, setSearchSettings]: any = useState(Utils.getSearchSites());
 	const searchCategories: string[] = Object.keys(searchSettings);
     
     const addCategory = (category: string = '') => {
-		if (!Utilities.isAddCategoryValid(searchCategories, category)) return false;
+		if (!Validation.isAddCategoryValid(searchCategories, category)) return false;
 		
 		setSearchSettings({ [category]: [], ...searchSettings });
 		return true;
 	};
     
     const removeCategory = (category: string = '') => {
-		if (!Utilities.isRemoveCategoryValid(searchCategories, category)) return false;
+		if (!Validation.isRemoveCategoryValid(searchCategories, category)) return false;
 
 		let updatedSearchSettings = {...searchSettings};
 		delete updatedSearchSettings[category];
@@ -24,7 +25,7 @@ const SearchSettingsContextProvider = (props: any) => {
     };
     
     const addSite = (category: string = '', site: string = '') => {
-		if (!Utilities.isAddSiteValid(searchCategories, category, searchSettings, site)) return false;
+		if (!Validation.isAddSiteValid(searchCategories, category, searchSettings, site)) return false;
 
 		let updatedCategory = searchSettings[category];
 		updatedCategory.unshift(site);
@@ -33,7 +34,7 @@ const SearchSettingsContextProvider = (props: any) => {
 	};
 
 	const removeSite = (category: string = '', site: string = '') => {
-		if (!Utilities.isRemoveSiteValid(searchCategories, category, searchSettings, site)) return false;
+		if (!Validation.isRemoveSiteValid(searchCategories, category, searchSettings, site)) return false;
 
 		let updatedCategory = searchSettings[category].filter((s: string) => s !== site)
 		setSearchSettings({ ...searchSettings, [category]: updatedCategory });

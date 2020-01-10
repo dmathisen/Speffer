@@ -2,11 +2,11 @@ import { useState, useContext } from 'react';
 import { SearchSettingsContext } from '../contexts/SearchSettingsContext';
 import { SearchEngineContext } from '../contexts/SearchEngineContext';
 
+import Utils from '../utilities/Utils';
+
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-
-import Utilities from './Utilities';
 
 const SearchForm = () => {
 	const { selectedSearchEngine } = useContext(SearchEngineContext as any);
@@ -25,7 +25,7 @@ const SearchForm = () => {
 		e.preventDefault();
 		if (!selectedCategory.trim().length || !searchText.trim().length) return;
 
-		const searchUrl = Utilities.getSearchUrl(selectedSearchEngine, searchSettings[selectedCategory], searchText);
+		const searchUrl = Utils.getSearchUrl(selectedSearchEngine, searchSettings[selectedCategory], searchText);
 		window.location.href = searchUrl;
 	}
 
