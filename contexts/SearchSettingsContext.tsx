@@ -5,7 +5,7 @@ import Validation from '../utilities/Validation';
 export const SearchSettingsContext = createContext({});
 
 const SearchSettingsContextProvider = (props: any) => {
-	const [searchSettings, setSearchSettings]: any = useState(Utils.getSearchSites());
+	const [searchSettings, setSearchSettings]: any = useState(Utils.getSearchSettings());
 	const searchCategories: string[] = Object.keys(searchSettings);
     
     const addCategory = (category: string = '') => {

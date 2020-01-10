@@ -15,7 +15,7 @@ const Utils = {
 		return false;
 	},
 
-	getSearchSites() {
+	getSearchSettings() {
 		// get from local storage, if it exists
 		if (process.browser) {
 			const localStorageData = localStorage.getItem('searchSettings');
@@ -24,7 +24,7 @@ const Utils = {
 			}
 		}
 	
-		// if not, get data from /data/sites.json
+		// if not, get data from /data/DefaultSearchSettings.json
 		return DefaultSearchSettings;
 	},
 
