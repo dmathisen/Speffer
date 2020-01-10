@@ -1,4 +1,4 @@
-const SearchList = {
+const DefaultSearchSettings = {
 	"Web Development": [
 		"developer.mozilla.org",
 		"w3.org",
@@ -37,4 +37,4 @@ const SearchList = {
 	]
 };
 
-export default SearchList;
+export default DefaultSearchSettings;

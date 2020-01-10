@@ -17,9 +17,9 @@ const SearchSettingsContextProvider = (props: any) => {
     const removeCategory = (category: string = '') => {
 		if (!Utilities.isRemoveCategoryValid(searchCategories, category)) return false;
 
-		let updatedSearchList = {...searchSettings};
-		delete updatedSearchList[category];
-		setSearchSettings(updatedSearchList);
+		let updatedSearchSettings = {...searchSettings};
+		delete updatedSearchSettings[category];
+		setSearchSettings(updatedSearchSettings);
 		return true;
     };
     

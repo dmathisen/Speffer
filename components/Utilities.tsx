@@ -1,4 +1,4 @@
-import SearchList from '../data/searchList';
+import DefaultSearchSettings from '../data/DefaultSearchSettings';
 
 const Utilities = {
 	isAddCategoryValid(searchCategories: string[], category: string): boolean {
@@ -23,7 +23,7 @@ const Utilities = {
 		return true;
 	},
 
-	isAddSiteValid(searchCategories: string[], category: string, searchList: any, site: string): boolean {
+	isAddSiteValid(searchCategories: string[], category: string, searchSettings: any, site: string): boolean {
 		if (site.trim().length === 0) {
 			return false;
 		}
@@ -31,7 +31,7 @@ const Utilities = {
 			alert('Something went wrong. Category does not exist.');
 			return false;
 		}
-		if (Utilities.siteExists(searchList, category, site)) {
+		if (Utilities.siteExists(searchSettings, category, site)) {
 			alert('Site already exists.');
 			return false;
 		}
@@ -42,7 +42,7 @@ const Utilities = {
 		return true;
 	},
 
-	isRemoveSiteValid(searchCategories: string[], category: string, searchList: any, site: string): boolean {
+	isRemoveSiteValid(searchCategories: string[], category: string, searchSettings: any, site: string): boolean {
 		if (category.trim().length === 0 || site.trim().length === 0) {
 			return false;
 		}
@@ -50,7 +50,7 @@ const Utilities = {
 			alert('Something went wrong. Category does not exist.');
 			return false;
 		}
-		if (!Utilities.siteExists(searchList, category, site)) {
+		if (!Utilities.siteExists(searchSettings, category, site)) {
 			alert('Something went wrong. Site does not exist.');
 			return false;
 		}
@@ -71,8 +71,8 @@ const Utilities = {
 		return false;
 	},
 
-	siteExists(searchList: any, category: string, site: string): boolean {
-		if (searchList[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
+	siteExists(searchSettings: any, category: string, site: string): boolean {
+		if (searchSettings[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
 			return true;
 		}
 		return false;
@@ -81,14 +81,14 @@ const Utilities = {
 	getSearchSites() {
 		// get from local storage, if it exists
 		if (process.browser) {
-			const localStorageData = window.localStorage.getItem('searchList');
+			const localStorageData = window.localStorage.getItem('searchSettings');
 			if (localStorageData) {
 				return JSON.parse(localStorageData);
 			}
 		}
 	
 		// if not, get data from /data/sites.json
-		return SearchList;
+		return DefaultSearchSettings;
 	},
 
 	getSelectedSearchEngine() {
