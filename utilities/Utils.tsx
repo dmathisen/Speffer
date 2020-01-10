@@ -19,22 +19,22 @@ const Utils = {
 		// get from local storage, if it exists
 		if (process.browser) {
 			const localStorageData = localStorage.getItem('searchSettings');
-			if (localStorageData) return JSON.parse(localStorageData);
+			return localStorageData ? JSON.parse(localStorageData) : DefaultSearchSettings;
 		}
 	
 		// if not, get data from /data/DefaultSearchSettings.json
-		return DefaultSearchSettings;
+		return {};
 	},
 
 	getSelectedSearchEngine() {
 		// get from local storage, if it exists
 		if (process.browser) {
 			const localStorageData = localStorage.getItem('selectedSearchEngine');
-			if (localStorageData) return localStorageData;
+			return localStorageData ? localStorageData : 'google';
 		}
 
 		// default to google
-		return 'google';
+		return '';
 	},
 
 	getSearchUrl(selectedSearchEngine: string, sites: string[], searchText: string) {

@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const Index = (props: any) => {
+const Index = () => {
 	return(<>
 		<Head>
 			<title>Speffer - Search Engine Customization</title>

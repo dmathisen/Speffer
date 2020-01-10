@@ -6,7 +6,7 @@ export const SearchSettingsContext = createContext({});
 
 const SearchSettingsContextProvider = (props: any) => {
 	const [searchSettings, setSearchSettings]: any = useState(Utils.getSearchSettings());
-	const searchCategories: string[] = Object.keys(searchSettings);
+	const searchCategories: string[] = searchSettings ? Object.keys(searchSettings) : [];
 
 	const updateLocalStorage = (updatedSearchSettings: any) => {
 		localStorage.setItem('searchSettings', JSON.stringify(updatedSearchSettings));
