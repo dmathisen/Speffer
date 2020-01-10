@@ -18,7 +18,7 @@ const Utils = {
 	getSearchSites() {
 		// get from local storage, if it exists
 		if (process.browser) {
-			const localStorageData = window.localStorage.getItem('searchSettings');
+			const localStorageData = localStorage.getItem('searchSettings');
 			if (localStorageData) {
 				return JSON.parse(localStorageData);
 			}
@@ -31,7 +31,7 @@ const Utils = {
 	getSelectedSearchEngine() {
 		// get from local storage, if it exists
 		if (process.browser) {
-			const localStorageData = window.localStorage.getItem('selectedSearchEngine');
+			const localStorageData = localStorage.getItem('selectedSearchEngine');
 			if (localStorageData) {
 				return JSON.parse(localStorageData);
 			}

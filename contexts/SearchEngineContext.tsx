@@ -11,7 +11,7 @@ const SearchEngineContextProvider = (props: any) => {
     }
 	
 	useEffect(() => {
-		localStorage.setItem('searchSettings', JSON.stringify(selectedSearchEngine))
+		localStorage.setItem('searchEngine', JSON.stringify(selectedSearchEngine))
 	}, [selectedSearchEngine]);
     
     return (
