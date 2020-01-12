@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 
-const CategoryAdd = ({ handleCategoryAdd }: any) => {
+const CategoryAdd = ({ handleCategorySelect }: any) => {
     const { addCategory } = useContext(SearchSettingsContext as any);
     const [ category, setCategory ] = useState('');
 
@@ -13,7 +13,7 @@ const CategoryAdd = ({ handleCategoryAdd }: any) => {
         e.preventDefault();
         addCategory(category);
 		setCategory('');
-		handleCategoryAdd(category)
+		handleCategorySelect(category)
     }
 
     return(<>

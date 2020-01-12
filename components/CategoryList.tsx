@@ -11,7 +11,7 @@ const CategoryList = ({ handleCategorySelect }: any) => {
         <ListGroup className="category-list">
             {
                 searchCategories.map((category: string, index: number) => (
-                    <ListGroup.Item onClick={handleCategorySelect} as="div" action key={index} data-category={category}>
+                    <ListGroup.Item onClick={(e: any) => handleCategorySelect(e.target.dataset.category)} as="div" action key={index} data-category={category}>
                         <Button onClick={() => removeCategory(category)} className="close" variant="link" aria-label="Close"><span aria-hidden="true">&times;</span></Button>
                         {category}
                     </ListGroup.Item>

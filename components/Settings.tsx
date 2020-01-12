@@ -14,18 +14,18 @@ import Card from 'react-bootstrap/Card';
 const Settings = () => {
 	const [ selectedCategory, setSelectedCategory ] = useState('');
 
-	const handleCategorySelect = (e: any) => {
-		e.preventDefault();
-		setSelectedCategory(e.target.dataset.category);
-
-		// handle active class
-		e.target.parentElement.childNodes.forEach((el: HTMLElement) => el.classList.remove('active'))
-		e.target.classList.add('active');
-	}
-
-	const handleCategoryAdd = (category: string) => {
+	const handleCategorySelect = (category: string) => {
 		setSelectedCategory(category);
-		(document.querySelector('.add-site') as HTMLElement).focus();
+
+		// wait until category item is added to DOM
+		setTimeout(() => {
+			// handle active class
+			document.querySelector('.category-list')?.childNodes.forEach((el: any) => el.classList.remove('active'));
+			document.querySelector(`[data-category="${category}"]`)?.classList.add('active');
+
+			// focus on 'add site'
+			(document.querySelector('.add-site') as HTMLElement).focus();
+		}, 0);
 	}
 
 	return (<>
@@ -51,7 +51,7 @@ const Settings = () => {
 							Set up your search categories
 						</Card.Header>
 						<Card.Body>
-							<CategoryAdd handleCategoryAdd={handleCategoryAdd} />
+							<CategoryAdd handleCategorySelect={handleCategorySelect} />
 							<CategoryList handleCategorySelect={handleCategorySelect} />
 						</Card.Body>
 					</Card>
