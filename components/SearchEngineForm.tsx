@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 
 const SearchEngineForm = () => {
 	const { selectedSearchEngine, setSearchEngine }: any = useContext(SearchEngineContext as any);
-	console.log('selectedSearchEngine', selectedSearchEngine)
 
     return (<>
         <Form>

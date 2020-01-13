@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import dynamic from 'next/dynamic'
 
-import CategoryList from './CategoryList';
 import CategoryAdd from './CategoryAddForm';
 import SitesList from './SitesList';
 import SitesAdd from './SitesAddForm';
-import SearchEngineForm from './SearchEngineForm';
+
+const SearchEngineForm = dynamic(() => import('./SearchEngineForm'), { ssr: false });
+const CategoryList = dynamic(() => import('./CategoryList'), { ssr: false });
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -63,6 +65,7 @@ const Settings = () => {
 						<Card.Header>
 							<Badge variant="secondary" className="mr-2">3</Badge>
 							Customize websites to search
+							{ selectedCategory?.trim().length ? ` (${selectedCategory})` : '' }
 						</Card.Header>
 						<Card.Body>
 							{ selectedCategory?.trim().length ? '' : 'Select a category to edit settings' }

@@ -1,9 +1,10 @@
 import Head from 'next/head';
+import dynamic from 'next/dynamic'
 
 import SearchSettingsContextProvider from '../contexts/SearchSettingsContext';
 import SearchEngineContextProvider from '../contexts/SearchEngineContext';
 
-import SearchForm from '../components/SearchForm';
+const SearchForm = dynamic(() => import('../components/SearchForm'), { ssr: false });
 import Settings from '../components/Settings';
 
 import Container from 'react-bootstrap/Container';

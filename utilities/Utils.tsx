@@ -21,7 +21,7 @@ const Utils = {
 			const localStorageData = localStorage.getItem('searchSettings');
 			return localStorageData ? JSON.parse(localStorageData) : DefaultSearchSettings;
 		}
-		return {};
+		return DefaultSearchSettings;
 	},
 
 	getSelectedSearchEngine() {
@@ -30,7 +30,7 @@ const Utils = {
 			const localStorageData = localStorage.getItem('searchEngine');
 			return localStorageData ? localStorageData : 'google';
 		}
-		return '';
+		return 'google';
 	},
 
 	getSearchUrl(selectedSearchEngine: string, sites: string[], searchText: string) {
