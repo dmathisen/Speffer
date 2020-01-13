@@ -2,14 +2,14 @@ import DefaultSearchSettings from '../data/DefaultSearchSettings';
 
 const Utils = {
 	categoryExists(searchCategories: string[], category: string): boolean {
-		if (searchCategories.find(cat => cat.toLowerCase() === category.toLowerCase())) {
+		if (searchCategories.some(cat => cat.toLowerCase() === category.toLowerCase())) {
 			return true;
 		}
 		return false;
 	},
 
 	siteExists(searchSettings: any, category: string, site: string): boolean {
-		if (searchSettings[category].find((s: string) => s.toLowerCase() === site.toLowerCase())) {
+		if (searchSettings[category].some((s: string) => s.toLowerCase() === site.toLowerCase())) {
 			return true;
 		}
 		return false;

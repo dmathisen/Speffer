@@ -22,8 +22,9 @@ const Settings = () => {
 		// wait until category item is added to DOM
 		setTimeout(() => {
 			// handle active class
-			document.querySelector('.category-list')?.childNodes.forEach((el: any) => el.classList.remove('active'));
-			document.querySelector(`[data-category="${category}"]`)?.classList.add('active');
+			const categoryItems = document.querySelectorAll('.category-list .list-group-item');
+			Array.from(categoryItems).forEach((el: any) => el.classList.remove('active'));
+			document.querySelector(`.category-list [data-category="${category}"]`)?.classList.add('active');
 
 			// focus on 'add site'
 			(document.querySelector('.add-site') as HTMLElement).focus();
