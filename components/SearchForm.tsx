@@ -50,7 +50,7 @@ const SearchForm = () => {
 			Sites to search:<br/>
 			{
 				categoryIsSelected ? searchSettings[selectedCategory].map((site: string, index: number) => 
-					<a href={'http://' + site} target="_blank"><Badge variant="secondary" className="mr-2" key={index}>{site}</Badge></a>
+					<a href={'http://' + site} target="_blank" key={index}><Badge variant="secondary" className="mr-2">{site}</Badge></a>
 				) : ''
 			}
 		</div>
