@@ -1,9 +1,10 @@
 # Speffer
 
 **Site Search Specifier**
+
 Speffer lets you choose custom sites to search, allowing for customization of search results.
 
- Written in React + NextJS
+Written in React + NextJS
 
 
 ### Installation
