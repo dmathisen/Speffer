@@ -31,39 +31,76 @@ const SearchForm = () => {
 		window.location.replace(searchUrl);
 	}
 
-	return(<>				
-		<Form inline onSubmit={handleSearchSubmit} className="mb-4 justify-content-center">
-			<Form.Control as="select" className="mb-2 mr-sm-2" onChange={(e: any) => setSelectedCategory(e.target.value)}>
-				<option value=''>- Select Category -</option>
-				{ searchCategories.map((category: any, index: number) => <option key={index} value={category}>{category}</option>) }
-			</Form.Control>
-			<Form.Control type="search" className="mb-2 mr-sm-2" onChange={(e: any) => setSearchText(e.target.value)}></Form.Control>
-			<Button type="submit" className="mb-2">Search</Button>
-			<Button type="button" className="mb-2 mr-sm-2" variant="link" onClick={handleSettingsBtnClick}>
-				<img className="cog" src="./images/cog.png" />
-				<span className="sr-only">Settings</span>
-			</Button>
-		</Form>
-		
-		<div style={{display: categoryIsSelected ? 'block' : 'none' }}>
-			{/* list of search sites */}
-			Sites to search:<br/>
-			{
-				categoryIsSelected ? searchSettings[selectedCategory].map((site: string, index: number) => 
-					<a href={'http://' + site} target="_blank" key={index}><Badge variant="secondary" className="mr-2">{site}</Badge></a>
-				) : ''
-			}
-		</div>
+	return (
+    <>
+      <Form
+        inline
+        onSubmit={handleSearchSubmit}
+        className="mb-4 justify-content-center"
+      >
+        <Form.Control
+          as="select"
+          className="mb-2 mr-sm-2"
+          onChange={(e: any) => setSelectedCategory(e.target.value)}
+        >
+          <option value="">- Select Category -</option>
+          {searchCategories.map((category: any, index: number) => (
+            <option key={index} value={category}>
+              {category}
+            </option>
+          ))}
+        </Form.Control>
+        <Form.Control
+          type="search"
+          className="mb-2 mr-sm-2"
+          onChange={(e: any) => setSearchText(e.target.value)}
+        ></Form.Control>
+        <Button type="submit" className="mb-2">
+          Search
+        </Button>
+        <Button
+          type="button"
+          className="mb-2 mr-sm-2"
+          variant="link"
+          onClick={handleSettingsBtnClick}
+        >
+          <img className="cog" src="./images/cog.png" />
+          <span className="sr-only">Settings</span>
+        </Button>
+      </Form>
 
-		<style global jsx>{`
-			.cog {
-				transition: transform .3s ease-in-out;
-			}
-			.cog-active {
-				transform:rotate(180deg);
-			}
-		`}</style>
-	</>);
+      <div style={{ display: categoryIsSelected ? "block" : "none" }}>
+        {/* list of search sites */}
+        Sites to search:
+        <br />
+        {categoryIsSelected
+          ? searchSettings[selectedCategory].map(
+              (site: string, index: number) => (
+                <a
+                  href={encodeURIComponent(site)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={index}
+                >
+                  <Badge variant="secondary" className="mr-2">
+                    {site}
+                  </Badge>
+                </a>
+              )
+            )
+          : ""}
+      </div>
+
+      <style global jsx>{`
+        .cog {
+          transition: transform 0.3s ease-in-out;
+        }
+        .cog-active {
+          transform: rotate(180deg);
+        }
+      `}</style>
+    </>
+  );
 };
   
   export default SearchForm;
