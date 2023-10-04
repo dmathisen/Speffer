@@ -21,7 +21,7 @@
     "glob-parent": "^6.0.2",
     "isomorphic-unfetch": "^3.1.0",
     "jquery": "^3.7.0",
-    "next": "^12.3.4",
+    "next": "^13.5.4",
     "object-path": "^0.11.8",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.7",
